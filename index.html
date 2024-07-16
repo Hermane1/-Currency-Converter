@@ -1,29 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Character encoding for the document -->
     <meta charset="UTF-8">
+    <!-- Setting the viewport to ensure proper scaling on mobile devices -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Title of the document, displayed in the browser tab -->
     <title>Currency Converter</title>
+    <!-- Link to the external CSS stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Main heading of the page -->
     <h1>Currency Converter</h1>
     <div class="converter">
+        <!-- Label and dropdown for selecting the base currency -->
         <label for="base-currency">Base Currency:</label>
         <select id="base-currency"></select>
+        <!-- Label and input field for entering the amount to convert -->
         <label for="amount">Amount:</label>
         <input type="number" id="amount" value="1" min="0">
+        <!-- Label and dropdown for selecting the target currency -->
         <label for="target-currency">Target Currency:</label>
         <select id="target-currency"></select>
+        <!-- Paragraph displaying the converted amount -->
         <p>Converted Amount: <span id="converted-amount"></span></p>
+        <!-- Label and input field for selecting a date to view historical rates -->
         <label for="date">Date:</label>
         <input type="date" id="date">
+        <!-- Button to view historical rates -->
         <button id="historical-rates">View Historical Rates</button>
+        <!-- Container to display historical rates -->
         <div id="historical-rates-container"></div>
+        <!-- Button to save favorite currency pairs -->
         <button id="save-favorite">Save Favorite</button>
+        <!-- Container to display saved favorite currency pairs -->
         <div id="favorite-currency-pairs"></div>
-        <div id="quota-info"></div> 
+        <!-- Container to display quota information, such as API call limits -->
+        <div id="quota-info"></div>
     </div>
+    <!-- Link to the external JavaScript file -->
     <script src="script.js"></script>
 </body>
 </html>

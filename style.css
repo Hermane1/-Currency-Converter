@@ -1,53 +1,62 @@
+/* Apply a universal font style and center the content vertically and horizontally */
 body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #f0f0f0;
+    font-family: Arial, sans-serif; /* Font style for the page */
+    display: flex; /* Use Flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Full viewport height */
+    margin: 0; /* Remove default margin */
+    background-color: #f0f0f0; /* Light grey background color */
 }
 
+/* Center-align the main heading */
 h1 {
-    text-align: center;
+    text-align: center; /* Center-align text */
 }
 
+/* Style for the main converter container */
 .converter {
-    background-color: rgb(55, 191, 17);
-    padding: 30px;
-    border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    background-color: rgb(55, 191, 17); /* Green background for the converter box */
+    padding: 30px; /* Padding around the content */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
+/* Style for labels, select elements, and input fields within the converter */
 .converter label, .converter select, .converter input {
-    display: block;
-    margin-bottom: 10px;
+    display: block; /* Display each element as a block */
+    margin-bottom: 10px; /* Spacing between elements */
 }
 
+/* Style for buttons within the converter */
 .converter button {
-    display: block;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    cursor: pointer;
-    background-color: #3498db;
-    color: rgb(255, 255, 255);
-    border: none;
-    border-radius: 5px;
-    padding: 5px 10px;
+    display: block; /* Display button as a block */
+    margin-top: 10px; /* Spacing above the button */
+    margin-bottom: 20px; /* Spacing below the button */
+    cursor: pointer; /* Pointer cursor on hover */
+    background-color: #3498db; /* Blue background color */
+    color: rgb(255, 255, 255); /* White text color */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 5px 10px; /* Padding inside the button */
 }
 
+/* Hover effect for buttons */
 .converter button:hover {
-    background-color: #2980b9;
+    background-color: #2980b9; /* Darker blue background on hover */
 }
 
+/* Margin at the top of paragraphs */
 p {
-    margin-top: 20px;
+    margin-top: 20px; /* Spacing above the paragraph */
 }
 
+/* Margin at the top of historical rates container */
 #historical-rates-container {
-    margin-top: 20px;
+    margin-top: 20px; /* Spacing above the historical rates container */
 }
 
+/* Margin at the top of favorite currency pairs container */
 #favorite-currency-pairs {
-    margin-top: 20px;
+    margin-top: 20px; /* Spacing above the favorite currency pairs container */
 }

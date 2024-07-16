@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
+    // Get references to DOM elements
     const baseCurrencySelect = document.getElementById("base-currency");
     const targetCurrencySelect = document.getElementById("target-currency");
     const amountInput = document.getElementById("amount");
@@ -7,10 +8,11 @@ document.addEventListener("DOMContentLoaded", function() {
     const historicalRatesContainer = document.getElementById("historical-rates-container");
     const favoriteCurrencyPairsContainer = document.getElementById("favorite-currency-pairs");
 
+    // API key and base URL for the currency API
     const apiKey = 'fca_live_tyxofLAcwMk2DQ220bPYcrjzOPjzcAVttTwvnkky';
     const apiUrl = `https://api.freecurrencyapi.com/v1`;
 
-    // Previously, the code was not able to recieve informaiton from the server
+    // Fetch available currencies and populate dropdowns
     fetch(`${apiUrl}/currencies?apikey=${apiKey}`)
         .then(response => {
             if (!response.ok) {
@@ -20,10 +22,11 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .then(data => {
             console.log('Fetched currency data:', data);
-            populateCurrencyDropdowns(data.data);
+            populateCurrencyDropdowns(data.data); // Populate dropdowns with fetched data
         })
         .catch(error => console.error('Error fetching currencies:', error));
 
+    // Function to populate currency dropdowns
     function populateCurrencyDropdowns(data) {
         for (const currencyCode in data) {
             const currency = data[currencyCode];
@@ -35,13 +38,14 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
+    // Function to convert currency based on selected values
     function convertCurrency() {
         const baseCurrency = baseCurrencySelect.value;
         const targetCurrency = targetCurrencySelect.value;
         const amount = parseFloat(amountInput.value);
 
         if (!baseCurrency || !targetCurrency || isNaN(amount) || amount <= 0) {
-            convertedAmountDisplay.textContent = "Invalid input";
+            convertedAmountDisplay.textContent = "Invalid input"; // Display error message for invalid input
             return;
         }
 
@@ -53,18 +57,19 @@ document.addEventListener("DOMContentLoaded", function() {
                 convertedAmountDisplay.textContent = `${amount} ${baseCurrency} = ${convertedAmount.toFixed(2)} ${targetCurrency}`;
             })
             .catch(error => {
-                convertedAmountDisplay.textContent = "Error fetching conversion rate";
+                convertedAmountDisplay.textContent = "Error fetching conversion rate"; // Display error message for API fetch failure
                 console.error('Error:', error);
             });
     }
 
+    // Function to view historical exchange rates
     function viewHistoricalRates() {
         const baseCurrency = baseCurrencySelect.value;
         const targetCurrency = targetCurrencySelect.value;
         const date = dateInput.value;
 
         if (!baseCurrency || !targetCurrency || !date) {
-            historicalRatesContainer.textContent = "Please select both currencies and a date";
+            historicalRatesContainer.textContent = "Please select both currencies and a date"; // Display error message for missing inputs
             return;
         }
 
@@ -75,17 +80,18 @@ document.addEventListener("DOMContentLoaded", function() {
                 historicalRatesContainer.textContent = `Historical exchange rate on ${date}: 1 ${baseCurrency} = ${rate} ${targetCurrency}`;
             })
             .catch(error => {
-                historicalRatesContainer.textContent = "Error fetching historical rates";
+                historicalRatesContainer.textContent = "Error fetching historical rates"; // Display error message for API fetch failure
                 console.error('Error:', error);
             });
     }
 
+    // Function to save a favorite currency pair
     function saveFavoritePair() {
         const baseCurrency = baseCurrencySelect.value;
         const targetCurrency = targetCurrencySelect.value;
 
         if (!baseCurrency || !targetCurrency) {
-            alert("Please select both currencies");
+            alert("Please select both currencies"); // Alert for missing currency selections
             return;
         }
 
@@ -104,13 +110,14 @@ document.addEventListener("DOMContentLoaded", function() {
                 favoriteItem.addEventListener("click", () => {
                     baseCurrencySelect.value = baseCurrency;
                     targetCurrencySelect.value = targetCurrency;
-                    convertCurrency();
+                    convertCurrency(); // Convert currency when favorite pair is clicked
                 });
                 favoriteCurrencyPairsContainer.appendChild(favoriteItem);
             })
             .catch(error => console.error('Error saving favorite pair:', error));
     }
 
+    // Fetch and display saved favorite currency pairs
     fetch('/api/favorites')
         .then(response => response.json())
         .then(favorites => {
@@ -121,16 +128,17 @@ document.addEventListener("DOMContentLoaded", function() {
                 favoriteItem.addEventListener("click", () => {
                     baseCurrencySelect.value = pair.base;
                     targetCurrencySelect.value = pair.target;
-                    convertCurrency();
+                    convertCurrency(); // Convert currency when favorite pair is clicked
                 });
                 favoriteCurrencyPairsContainer.appendChild(favoriteItem);
             });
         })
         .catch(error => console.error('Error loading favorite pairs:', error));
 
-    baseCurrencySelect.addEventListener("change", convertCurrency);
-    targetCurrencySelect.addEventListener("change", convertCurrency);
-    amountInput.addEventListener("input", convertCurrency);
-    document.getElementById("historical-rates").addEventListener("click", viewHistoricalRates);
-    document.getElementById("save-favorite").addEventListener("click", saveFavoritePair);
+    // Event listeners for user actions
+    baseCurrencySelect.addEventListener("change", convertCurrency); // Convert currency when base currency is changed
+    targetCurrencySelect.addEventListener("change", convertCurrency); // Convert currency when target currency is changed
+    amountInput.addEventListener("input", convertCurrency); // Convert currency when amount is changed
+    document.getElementById("historical-rates").addEventListener("click", viewHistoricalRates); // View historical rates on button click
+    document.getElementById("save-favorite").addEventListener("click", saveFavoritePair); // Save favorite pair on button click
 });
